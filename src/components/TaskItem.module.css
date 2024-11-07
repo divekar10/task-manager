@@ -1,0 +1,49 @@
+.taskItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .taskInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .taskActions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .button_container{
+    display: flex;
+    gap: 20px;
+  }
+
+  button {
+    background-color: #ff4d4d;
+    border: none;
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #cc0000;
+  }
+  
