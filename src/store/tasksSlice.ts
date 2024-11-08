@@ -12,6 +12,8 @@ import { Task } from '../types/task';
 // }
 
 export type TaskFilterValues = 'all' | 'completed' | 'pending';
+export type SortOrder = 'asc' | 'desc';
+
 const TASKS_STORAGE_KEY = 'taskManagerTasks';
 
 // Utility to save tasks to local storage
@@ -28,11 +30,14 @@ const loadTasksFromLocalStorage = (): Task[] => {
 interface TasksState {
   tasks: Task[];
   filter: TaskFilterValues;
+  sortOrder: SortOrder;
 }
 
+//initial state (It will check for task in localStorage, If not found empty array will be return)
 const initialState: TasksState = {
   tasks: loadTasksFromLocalStorage(),
   filter: 'all',
+  sortOrder: 'asc'
 };
 
 const tasksSlice = createSlice({
@@ -52,7 +57,7 @@ const tasksSlice = createSlice({
     },
     deleteTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter(task => task.id !== action.payload);
-      saveTasksToLocalStorage(state.tasks); 
+      saveTasksToLocalStorage(state.tasks);
     },
     editTask: (state, action: PayloadAction<{ id: string; title?: string; description?: string; dueDate?: Date }>) => {
       const { id, title, description, dueDate } = action.payload;
@@ -74,9 +79,12 @@ const tasksSlice = createSlice({
     setFilter: (state, action: PayloadAction<TaskFilterValues>) => {
       state.filter = action.payload;
     },
+    setSortOrder: (state, action: PayloadAction<SortOrder>) => {
+      state.sortOrder = action.payload;
+    },
   },
 });
 
-export const { addTask, deleteTask, editTask, toggleTaskCompletion, setFilter } = tasksSlice.actions;
+export const { addTask, deleteTask, editTask, toggleTaskCompletion, setFilter, setSortOrder } = tasksSlice.actions;
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 export default tasksSlice.reducer;
