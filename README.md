@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Task Manager Application
+A Task Manager built with React, TypeScript, and Redux. This application allows users to create, edit, delete, and manage tasks, with additional features for filtering and sorting tasks based on completion status and due dates. Task data is stored in local storage to persist data across page reloads.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+Add, Edit, Delete Tasks: Manage tasks with title, description, and due date.
 
-In the project directory, you can run:
+Mark Tasks as Complete: Use checkboxes to mark tasks as complete.
 
-### `npm start`
+Filter Tasks: View all tasks, only completed tasks, or only pending tasks.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Sort Tasks: Sort tasks by due date in ascending or descending order.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Local Storage Persistence: Tasks are saved in local storage, so they remain available even after page reloads.
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React (with Functional Components and Hooks)
 
-### `npm run build`
+TypeScript for type safety
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Redux and Redux Toolkit for state management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+CSS for styling
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+date-fns for date formatting
 
-### `npm run eject`
+localStorage for persistence
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Installation
+1. Clone the repository:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    git clone https://github.com/yourusername/task-manager.git
+    cd task-manager
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. Install dependencies:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   npm install
 
-## Learn More
+3. Start the application:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The app should now be running at http://localhost:3000.
+
+## Redux State Management
+This app uses Redux to manage the task state and filter/sort options:
+
+tasks: Holds the array of tasks.
+
+filter: Determines the current filter (all, completed, or pending).
+
+sortOrder: Controls sorting order by due date.
+
+## Local Storage Persistence
+Task data is saved to local storage after each update. This ensures tasks persist across page reloads.
