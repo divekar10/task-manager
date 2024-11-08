@@ -12,6 +12,18 @@ import { Task } from '../types/task';
 // }
 
 export type TaskFilterValues = 'all' | 'completed' | 'pending';
+const TASKS_STORAGE_KEY = 'taskManagerTasks';
+
+// Utility to save tasks to local storage
+const saveTasksToLocalStorage = (tasks: Task[]) => {
+  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+};
+
+// Utility to load tasks from local storage
+const loadTasksFromLocalStorage = (): Task[] => {
+  const tasksJson = localStorage.getItem(TASKS_STORAGE_KEY);
+  return tasksJson ? JSON.parse(tasksJson) : [];
+};
 
 interface TasksState {
   tasks: Task[];
@@ -19,7 +31,7 @@ interface TasksState {
 }
 
 const initialState: TasksState = {
-  tasks: [],
+  tasks: loadTasksFromLocalStorage(),
   filter: 'all',
 };
 
@@ -36,9 +48,11 @@ const tasksSlice = createSlice({
         completed: false,
       };
       state.tasks.push(newTask);
+      saveTasksToLocalStorage(state.tasks);
     },
     deleteTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter(task => task.id !== action.payload);
+      saveTasksToLocalStorage(state.tasks); 
     },
     editTask: (state, action: PayloadAction<{ id: string; title?: string; description?: string; dueDate?: Date }>) => {
       const { id, title, description, dueDate } = action.payload;
@@ -48,12 +62,14 @@ const tasksSlice = createSlice({
         if (description !== undefined) task.description = description;
         if (dueDate !== undefined) task.dueDate = dueDate;
       }
+      saveTasksToLocalStorage(state.tasks);
     },
     toggleTaskCompletion: (state, action: PayloadAction<string>) => {
       const task = state.tasks.find(task => task.id === action.payload);
       if (task) {
         task.completed = !task.completed;
       }
+      saveTasksToLocalStorage(state.tasks);
     },
     setFilter: (state, action: PayloadAction<TaskFilterValues>) => {
       state.filter = action.payload;

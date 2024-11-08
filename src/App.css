@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 
 .App {
-  width: 100vm;
+  width: 600px;
   height: 100vm;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: cadetblue;
+  background-color: white;
   font-family: "Hubot Sans", sans-serif;
 }
 
@@ -19,9 +19,9 @@
   text-align: center;
 }
 
-@media (max-width : 800px) {
+/* @media (max-width : 800px) {
   .heading {
     margin: 15px 0;
     font-size: 35px;
   }
-}
+} */

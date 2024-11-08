@@ -18,8 +18,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, className }) => {
     const [editDescription, setEditDescription] = useState(task.description);
     const [editDueDate, setEditDueDate] = useState(task.dueDate);
 
+    const today = new Date().toISOString().slice(0, 10);
+
     let lineThroughStyle: React.CSSProperties = {
-        textDecoration: task.completed ? 'line-through' : 'none'
+        textDecoration: task.completed ? 'line-through' : 'none',
+        overflow:'hidden'
     }
 
     const handleEditSubmit = (e: React.FormEvent) => {
@@ -38,17 +41,20 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, className }) => {
     };
 
     return (
-        <div className={Style.form}>
+        <div >
             {isEditing ? (
-                <form onSubmit={handleEditSubmit}>
+                <form onSubmit={handleEditSubmit} className={Style.form}>
+                    <h4 style={{marginBottom:'unset'}}>Edit Task</h4>
                     <input
                         required
+                        maxLength={50}
                         type="text"
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
                     />
                     <input
                         required
+                        maxLength={100}
                         type='text'
                         value={editDescription}
                         onChange={(e) => setEditDescription(e.target.value)}
@@ -56,6 +62,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, className }) => {
                     <input
                         required
                         type="date"
+                        min={today}
                         value={format(editDueDate, 'yyyy-MM-dd')}
                         onChange={(e) => setEditDueDate(new Date(e.target.value))}
                     />
